@@ -121,9 +121,3 @@ psql -U postgres -f Music_Store_database.sql
 -- 2. Open Solutions.sql in pgAdmin
 -- Run each query individually to see results
 ```
-
-## 👤 Author
-
-**Shaurya**
-IIT (ISM) Dhanbad | Mining Engineering
-[Portfolio](https://shaurya25.carrd.co) · [LinkedIn](#) · [GitHub](#)
