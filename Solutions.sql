@@ -113,8 +113,8 @@ with popular_genre as
 	join customer on customer.customer_id = invoice.customer_id
 	join track on track.track_id = invoice_line.track_id
 	join genre on genre.genre_id = track.genre_id
-	group 2,3,4
-	order 2 asc, 1 desc
+	group by 2,3,4
+	order by 2 asc, 1 desc
 )
 select * from popular_genre where RowNo <= 1
 
@@ -125,11 +125,11 @@ For countries where the top amount spent is shared, provide all customers who sp
 /* Steps to Solve:  Similar to the above question. There are two parts in question- 
 first find the most spent on music for each country and second filter the data for respective customers. */
 
-WITH Customter_with_country AS (
-		SELECT customer.customer_id,first_name,last_name,billing_country,SUM(total) AS total_spending,
-	    ROW_NUMBER() OVER(PARTITION BY billing_country ORDER BY SUM(total) DESC) AS RowNo 
-		FROM invoice
-		JOIN customer ON customer.customer_id = invoice.customer_id
-		GROUP BY 1,2,3,4
-		ORDER BY 4 ASC,5 DESC)
-SELECT * FROM Customter_with_country WHERE RowNo <= 1
+with Customer_with_country as (
+		select customer.customer_id,first_name,last_name,billing_country,SUM(total) as total_spending,
+	    row_number() over(partition by billing_country order by sum(total) desc) as RowNo 
+		from invoice
+		join customer ON customer.customer_id = invoice.customer_id
+		group by 1,2,3,4
+		order by 4 asc,5 desc)
+select * from Customer_with_country where RowNo <= 1
