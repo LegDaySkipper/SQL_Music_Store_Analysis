@@ -122,29 +122,6 @@ psql -U postgres -f Music_Store_database.sql
 -- Run each query individually to see results
 ```
 
----
-
-## 💡 Sample Query — Advanced (6-Table Join)
-
-```sql
--- Amount spent by each customer on each artist
-SELECT 
-    customer.first_name, 
-    customer.last_name, 
-    artist.name AS artist_name,
-    SUM(invoice_line.unit_price * invoice_line.quantity) AS total_spent
-FROM customer
-JOIN invoice ON customer.customer_id = invoice.customer_id
-JOIN invoice_line ON invoice.invoice_id = invoice_line.invoice_id
-JOIN track ON invoice_line.track_id = track.track_id
-JOIN album ON track.album_id = album.album_id
-JOIN artist ON album.artist_id = artist.artist_id
-GROUP BY customer.first_name, customer.last_name, artist.name
-ORDER BY total_spent DESC;
-```
-
----
-
 ## 👤 Author
 
 **Shaurya**
