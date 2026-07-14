@@ -27,7 +27,6 @@ select billing_city, ROUND(SUM(total)::numeric, 2) as invoice_total from invoice
 group by billing_city
 order by invoice_total desc
 limit 1
-select * from invoice
 
 /* Q5: Who is the best customer? The customer who has spent the most money will be declared the best customer. 
 Write a query that returns the person who has spent the most money.*/
